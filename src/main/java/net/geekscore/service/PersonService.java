@@ -20,6 +20,7 @@ public class PersonService implements EntityService {
     @Inject
     public PersonService(@NotNull @Valid MongoDatabase database) {
         this.collection = database.getCollection("person", Person.class);
+
     }
 
     @Override

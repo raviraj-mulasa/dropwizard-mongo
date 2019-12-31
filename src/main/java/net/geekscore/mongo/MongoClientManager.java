@@ -1,13 +1,19 @@
 package net.geekscore.mongo;
 
-import com.mongodb.*;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.connection.SslSettings;
 import io.dropwizard.lifecycle.Managed;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Arrays;
 
 public class MongoClientManager implements Managed {
 
@@ -56,20 +62,22 @@ public class MongoClientManager implements Managed {
         );
 
 
-        MongoClientOptions options = MongoClientOptions
+        MongoClientSettings mongoClientSettings = MongoClientSettings
                 .builder()
                 .applicationName("Dropwizard-MongoDB")
                 .codecRegistry(pojoCodecRegistry)
-                .sslEnabled(false)
+                .credential(credential)
+                .applyToClusterSettings(builder ->
+                        builder.hosts(
+                                Arrays.asList(
+                                    new ServerAddress(this.mongoDBSettings.getHostname(), this.mongoDBSettings.getPort())
+                                )
+                        )
+                )
+                .applyToSslSettings(builder ->
+                        builder.applySettings(SslSettings.builder().enabled(false).build())) // TODO
                 .build();
 
-        this.mongoClient = new MongoClient(
-                new ServerAddress(
-                        this.mongoDBSettings.getHostname()
-                        , this.mongoDBSettings.getPort()
-                ),
-                credential,
-                options
-        );
+        this.mongoClient = MongoClients.create(mongoClientSettings);
     }
 }

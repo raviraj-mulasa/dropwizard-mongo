@@ -1,8 +1,8 @@
 package net.geekscore.health;
 
 import com.codahale.metrics.health.HealthCheck;
-import com.mongodb.MongoClient;
 import com.mongodb.client.ListDatabasesIterable;
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCursor;
 import net.geekscore.AppConfiguration;
 import net.geekscore.mongo.MongoDBSettings;

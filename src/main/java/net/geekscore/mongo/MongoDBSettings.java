@@ -1,6 +1,6 @@
 package net.geekscore.mongo;
 
-import com.mongodb.MongoClient;
+import com.mongodb.client.MongoClient;
 import io.dropwizard.setup.Environment;
 
 import javax.validation.constraints.Min;

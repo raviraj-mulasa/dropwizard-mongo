@@ -1,6 +1,6 @@
 package net.geekscore;
 
-import com.mongodb.MongoClient;
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
