@@ -2,16 +2,14 @@ package net.geekscore.core;
 
 import com.mongodb.client.MongoCollection;
 
-public interface EntityService<T extends BaseEntity> {
+public interface EntityService {
 
-    String collectionName();
+    <T extends BaseEntity> MongoCollection<T> collection();
 
-    T save(T entityToSave);
-
-//    default T save(T entityToSave) {
-//        MongoCollection<T> collection = database.getCollection(this.collectionName(), entityToSave.getClass());
-//        collection.insertOne(entityToSave);
-//        return entityToSave;
-//    }
+    default <T extends BaseEntity> T save(T entityToSave) {
+        MongoCollection<T> collection = collection();
+        collection.insertOne(entityToSave);
+        return entityToSave;
+    }
 
 }

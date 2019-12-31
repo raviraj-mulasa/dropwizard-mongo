@@ -7,16 +7,13 @@ import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.jersey.setup.JerseyEnvironment;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import net.geekscore.core.BaseEntity;
-import net.geekscore.core.Person;
+import net.geekscore.core.EntityService;
 import net.geekscore.health.MongoDBHeathCheck;
-import net.geekscore.mongo.MongoClientManager;
 import net.geekscore.mongo.MongoDBSettings;
 import net.geekscore.resources.GreetResource;
 import net.geekscore.service.GreetService;
 import net.geekscore.service.GreetServiceImpl;
 import net.geekscore.service.PersonService;
-import net.geekscore.service.PersonServiceImpl;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
 import javax.inject.Singleton;
@@ -60,7 +57,8 @@ public class App extends Application<AppConfiguration> {
 //                        .build();
 //                bind(ad);
 
-                bind(PersonServiceImpl.class).to(PersonService.class).in(Singleton.class);
+//                bind(PersonService.class).to(EntityService.class).in(Singleton.class);
+                bind(PersonService.class).named("person").to(EntityService.class).in(Singleton.class);
                 bind(GreetServiceImpl.class).to(GreetService.class).in(Singleton.class);
                 bind(database).to(MongoDatabase.class);
 
