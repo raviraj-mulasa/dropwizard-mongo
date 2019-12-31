@@ -10,8 +10,8 @@ public interface EntityService extends Loggable {
     default <T extends BaseEntity> T save(T entityToSave) {
         Logger logger = logger();
         MongoCollection<T> collection = collection();
+        entityToSave.setVersion(entityToSave.getVersion() + 1);
         collection.insertOne(entityToSave);
-        logger.debug("Entity saved");
         return entityToSave;
     }
 

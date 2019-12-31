@@ -16,19 +16,14 @@ public class GreetServiceImpl implements GreetService {
 
     private final AtomicLong counter;
 
-    private final EntityService entityService;
-
     @Inject
-    public GreetServiceImpl(@NotNull @Named("person") EntityService entityService) {
-        this.entityService = entityService;
+    public GreetServiceImpl() {
         this.counter = new AtomicLong();
     }
 
 
     @Override
     public Greeting greet(String name) {
-        Person ada = new Person("Ada Byron", 20, new Address("St James Square", "London", "W1"));
-        this.entityService.save(ada);
         return new Greeting(counter.incrementAndGet(), String.format("Hello %s",name));
 
     }

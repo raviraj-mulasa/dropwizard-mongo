@@ -11,6 +11,7 @@ import net.geekscore.core.EntityService;
 import net.geekscore.health.MongoDBHeathCheck;
 import net.geekscore.mongo.MongoDBSettings;
 import net.geekscore.resources.GreetResource;
+import net.geekscore.resources.PersonResource;
 import net.geekscore.service.GreetService;
 import net.geekscore.service.GreetServiceImpl;
 import net.geekscore.service.PersonService;
@@ -66,6 +67,7 @@ public class App extends Application<AppConfiguration> {
         });
 
         jersey.register(GreetResource.class);
+        jersey.register(PersonResource.class);
 
         environment.healthChecks().register("mongoDB", new MongoDBHeathCheck(configuration, mongoClient));
 

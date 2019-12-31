@@ -1,6 +1,6 @@
 package net.geekscore.core;
 
-public final class Address extends BaseEntity {
+public final class Address {
 
     private String street;
     private String city;
