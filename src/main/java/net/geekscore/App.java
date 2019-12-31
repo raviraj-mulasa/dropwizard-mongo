@@ -4,6 +4,7 @@ import io.dropwizard.Application;
 import io.dropwizard.jersey.setup.JerseyEnvironment;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import net.geekscore.health.MongoDBHeathCheck;
 import net.geekscore.mongo.MongoClientManager;
 import net.geekscore.resources.GreetResource;
 import net.geekscore.service.GreetService;
@@ -44,6 +45,8 @@ public class App extends Application<AppConfiguration> {
 
         final MongoClientManager mongoClientManager = new MongoClientManager(configuration.getMongoClientSettings());
         environment.lifecycle().manage(mongoClientManager);
+
+        environment.healthChecks().register("mongoDB", new MongoDBHeathCheck(mongoClientManager));
 
     }
 }

@@ -9,7 +9,8 @@ mongo:
   port: 27017
   username:
   password:
-  database:
+  authDatabase: admin
+  database: dropwizard-mongo
 
 
 # Logging settings.

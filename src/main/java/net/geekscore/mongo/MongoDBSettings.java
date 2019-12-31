@@ -3,7 +3,7 @@ package net.geekscore.mongo;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
-public class MongoClientSettings {
+public class MongoDBSettings {
 
     private String hostname = "localhost";
 
@@ -18,6 +18,9 @@ public class MongoClientSettings {
 
     @NotEmpty
     private String database;
+
+    @NotEmpty
+    private String authDatabase;
 
     public String getHostname() {
         return hostname;
@@ -57,5 +60,13 @@ public class MongoClientSettings {
 
     public void setDatabase(String database) {
         this.database = database;
+    }
+
+    public String getAuthDatabase() {
+        return this.authDatabase;
+    }
+
+    public void setAuthDatabase(String authDatabase) {
+        this.authDatabase = authDatabase;
     }
 }
