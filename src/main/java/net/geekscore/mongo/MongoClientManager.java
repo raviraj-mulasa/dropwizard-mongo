@@ -1,6 +1,7 @@
 package net.geekscore.mongo;
 
 import com.mongodb.*;
+import com.mongodb.client.MongoDatabase;
 import io.dropwizard.lifecycle.Managed;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -18,11 +19,29 @@ public class MongoClientManager implements Managed {
 
     public MongoClientManager(MongoDBSettings mongoDBSettings) {
         this.mongoDBSettings = mongoDBSettings;
+        this.init();
     }
 
     @Override
     public void start() throws Exception {
 
+    }
+
+    @Override
+    public void stop() throws Exception {
+        if(null != mongoClient) {
+            logger.debug("Closing mongo client");
+            this.mongoClient.close();
+            logger.debug("Closed mongo client");
+        }
+    }
+
+
+    public MongoClient getMongoClient() {
+        return this.mongoClient;
+    }
+
+    private void init() {
         CodecRegistry pojoCodecRegistry = CodecRegistries.fromRegistries(
                 MongoClientSettings.getDefaultCodecRegistry()
                 , CodecRegistries.fromProviders(
@@ -39,6 +58,7 @@ public class MongoClientManager implements Managed {
 
         MongoClientOptions options = MongoClientOptions
                 .builder()
+                .applicationName("Dropwizard-MongoDB")
                 .codecRegistry(pojoCodecRegistry)
                 .sslEnabled(false)
                 .build();
@@ -51,22 +71,5 @@ public class MongoClientManager implements Managed {
                 credential,
                 options
         );
-    }
-
-    @Override
-    public void stop() throws Exception {
-        if(null != mongoClient) {
-            logger.debug("Closing mongo client");
-            this.mongoClient.close();
-            logger.debug("Closed mongo client");
-        }
-    }
-
-    public MongoDBSettings getMongoDBSettings() {
-        return this.mongoDBSettings;
-    }
-
-    public MongoClient getMongoClient() {
-        return this.mongoClient;
     }
 }

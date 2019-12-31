@@ -34,6 +34,9 @@ jar {
 dependencies {
     implementation group: 'io.dropwizard', name: 'dropwizard-core', version: '2.0.0'
     implementation group: 'io.dropwizard', name: 'dropwizard-assets', version: '2.0.0'
+    // https://mvnrepository.com/artifact/zone.dragon.dropwizard/dropwizard-hk2
+//    implementation group: 'zone.dragon.dropwizard', name: 'dropwizard-hk2', version: '2.0.5-07239e'
+
     implementation group: 'org.mongodb', name: 'mongo-java-driver', version: '3.12.0'
 
 

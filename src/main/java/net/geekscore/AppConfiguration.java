@@ -7,10 +7,10 @@ import net.geekscore.mongo.MongoDBSettings;
 public class AppConfiguration extends Configuration {
 
     @JsonProperty("mongo")
-    private MongoDBSettings mongoClientSettings;
+    private MongoDBSettings mongoDBSettings;
 
     @JsonProperty("mongo")
-    public MongoDBSettings getMongoClientSettings() {
-        return this.mongoClientSettings;
+    public MongoDBSettings getMongoDBSettings() {
+        return this.mongoDBSettings;
     }
 }

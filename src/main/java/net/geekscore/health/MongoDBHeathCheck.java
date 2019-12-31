@@ -4,7 +4,7 @@ import com.codahale.metrics.health.HealthCheck;
 import com.mongodb.MongoClient;
 import com.mongodb.client.ListDatabasesIterable;
 import com.mongodb.client.MongoCursor;
-import net.geekscore.mongo.MongoClientManager;
+import net.geekscore.AppConfiguration;
 import net.geekscore.mongo.MongoDBSettings;
 import org.bson.Document;
 import org.slf4j.Logger;
@@ -14,16 +14,22 @@ public class MongoDBHeathCheck extends HealthCheck {
 
     private static final Logger logger = LoggerFactory.getLogger(MongoDBHeathCheck.class);
 
-    private final MongoClientManager mongoClientManager;
+    private final AppConfiguration configuration;
 
-    public MongoDBHeathCheck(MongoClientManager MongoClientManager) {
-        this.mongoClientManager = MongoClientManager;
+    private final MongoClient mongoClient;
+
+    public MongoDBHeathCheck(
+            AppConfiguration configuration
+            , MongoClient mongoClient
+    ) {
+        this.configuration = configuration;
+        this.mongoClient = mongoClient;
     }
 
     @Override
     protected Result check() throws Exception {
 
-        MongoDBSettings mongoDBSettings = this.mongoClientManager.getMongoDBSettings();
+        MongoDBSettings mongoDBSettings = configuration.getMongoDBSettings();
         String mongoUrl = String.format(
                 "mongodb://%s:XXXXX@%s:%d/%s"
                 , mongoDBSettings.getUsername()
@@ -34,7 +40,6 @@ public class MongoDBHeathCheck extends HealthCheck {
 
         Result result = Result.unhealthy(String.format("Cannot connect to %s", mongoUrl));
         try {
-            MongoClient mongoClient = this.mongoClientManager.getMongoClient();
             ListDatabasesIterable<Document> databases = mongoClient.listDatabases();
             MongoCursor<Document> mongoCursor = databases.cursor();
             if (mongoCursor.tryNext() != null) {
