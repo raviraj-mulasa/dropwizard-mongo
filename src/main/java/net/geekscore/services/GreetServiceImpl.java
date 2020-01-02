@@ -1,4 +1,4 @@
-package net.geekscore.service;
+package net.geekscore.services;
 
 
 import net.geekscore.api.Greeting;

@@ -1,6 +1,5 @@
 package net.geekscore.mongo;
 
-import com.mongodb.client.MongoClient;
 import io.dropwizard.setup.Environment;
 
 import javax.validation.constraints.Min;
@@ -73,9 +72,8 @@ public class MongoDBSettings {
         this.authDatabase = authDatabase;
     }
 
-    public MongoClient build(Environment environment) {
-        MongoClientManager mongoClientManager = new MongoClientManager(this);
+    public void build(Environment environment) {
+        MongoDBManager mongoClientManager = new MongoDBManager(this);
         environment.lifecycle().manage(mongoClientManager);
-        return mongoClientManager.getMongoClient();
     }
 }

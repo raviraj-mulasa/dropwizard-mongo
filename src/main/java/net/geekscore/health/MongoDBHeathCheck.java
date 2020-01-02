@@ -2,10 +2,10 @@ package net.geekscore.health;
 
 import com.codahale.metrics.health.HealthCheck;
 import com.mongodb.client.ListDatabasesIterable;
-import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCursor;
 import net.geekscore.AppConfiguration;
-import net.geekscore.mongo.MongoDBSettings;
+import net.geekscore.mongo.MongoDB;
+import net.geekscore.utils.MongoDBUtils;
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,31 +16,16 @@ public class MongoDBHeathCheck extends HealthCheck {
 
     private final AppConfiguration configuration;
 
-    private final MongoClient mongoClient;
-
-    public MongoDBHeathCheck(
-            AppConfiguration configuration
-            , MongoClient mongoClient
-    ) {
+    public MongoDBHeathCheck(AppConfiguration configuration) {
         this.configuration = configuration;
-        this.mongoClient = mongoClient;
     }
 
     @Override
     protected Result check() throws Exception {
-
-        MongoDBSettings mongoDBSettings = configuration.getMongoDBSettings();
-        String mongoUrl = String.format(
-                "mongodb://%s:XXXXX@%s:%d/%s"
-                , mongoDBSettings.getUsername()
-                , mongoDBSettings.getHostname()
-                , mongoDBSettings.getPort()
-                , mongoDBSettings.getDatabase()
-        );
-
+        String mongoUrl = MongoDBUtils.url(configuration.getMongoDBSettings());
         Result result = Result.unhealthy(String.format("Cannot connect to %s", mongoUrl));
         try {
-            ListDatabasesIterable<Document> databases = mongoClient.listDatabases();
+            ListDatabasesIterable<Document> databases = MongoDB.INSTANCE.client().listDatabases();
             MongoCursor<Document> mongoCursor = databases.cursor();
             if (mongoCursor.tryNext() != null) {
                 result =  Result.healthy();

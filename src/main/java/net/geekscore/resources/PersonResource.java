@@ -17,12 +17,10 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class PersonResource {
 
-    private final EntityService entityService;
+    private final EntityService<Person> entityService;
 
     @Inject
-    public PersonResource(
-            @NotNull @Named("person") EntityService entityService
-    ) {
+    public PersonResource(@NotNull @Named("person") EntityService<Person> entityService) {
         this.entityService = entityService;
     }
 

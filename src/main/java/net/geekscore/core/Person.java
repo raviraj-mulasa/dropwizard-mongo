@@ -1,5 +1,13 @@
 package net.geekscore.core;
 
+import javax.persistence.Index;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+@Table(name="person"
+        , uniqueConstraints=@UniqueConstraint(columnNames={"code", "uid"})
+        , indexes={@Index(name = "ssd", columnList="sdsd,wwewe", unique = true)}
+        )
 public final class Person extends BaseEntity {
 
     private String name;

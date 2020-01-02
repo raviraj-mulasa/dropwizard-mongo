@@ -2,7 +2,7 @@ package net.geekscore.resources;
 
 import com.codahale.metrics.annotation.Timed;
 import net.geekscore.api.Greeting;
-import net.geekscore.service.GreetService;
+import net.geekscore.services.GreetService;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
