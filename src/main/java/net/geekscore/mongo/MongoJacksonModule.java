@@ -2,7 +2,10 @@ package net.geekscore.mongo;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import net.geekscore.core.*;
+import net.geekscore.core.domain.Address;
+import net.geekscore.core.domain.AddressMixIn;
+import net.geekscore.core.domain.Person;
+import net.geekscore.core.domain.PersonMixIn;
 import org.bson.types.ObjectId;
 
 public class MongoJacksonModule extends SimpleModule {

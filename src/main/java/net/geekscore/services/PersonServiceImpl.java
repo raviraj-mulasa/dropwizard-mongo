@@ -1,22 +1,19 @@
 package net.geekscore.services;
 
-import com.mongodb.client.MongoCollection;
-import net.geekscore.core.Person;
-import net.geekscore.mongo.MongoDB;
-import net.geekscore.mongo.MongoRepository;
+import net.geekscore.core.domain.Person;
+import net.geekscore.core.Repository;
 
 import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
 
 
-public class PersonServiceImpl implements MongoRepository<Person>, PersonService {
+public class PersonServiceImpl implements PersonService {
+
+    private final Repository<Person> personRepository;
 
     @Inject
-    public PersonServiceImpl() {
-    }
-
-    @Override
-    public MongoCollection<Person> collection() {
-        return MongoDB.INSTANCE.database().getCollection("person", Person.class);
+    public PersonServiceImpl(@NotNull Repository<Person> personRepository) {
+        this.personRepository = personRepository;
     }
 
     @Override

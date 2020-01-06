@@ -1,6 +1,6 @@
 package net.geekscore.resources;
 
-import net.geekscore.core.Employer;
+import net.geekscore.core.domain.Employer;
 import net.geekscore.core.Repository;
 import net.geekscore.core.DefaultResource;
 

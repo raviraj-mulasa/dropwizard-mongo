@@ -1,4 +1,7 @@
-package net.geekscore.core;
+package net.geekscore.core.domain;
+
+import net.geekscore.core.BaseEntity;
+import net.geekscore.core.domain.Address;
 
 import javax.validation.constraints.Min;
 import java.util.List;

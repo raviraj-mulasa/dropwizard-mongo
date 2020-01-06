@@ -1,4 +1,4 @@
-package net.geekscore.utils;
+package net.geekscore.mongo.utils;
 
 import net.geekscore.mongo.MongoDBSettings;
 

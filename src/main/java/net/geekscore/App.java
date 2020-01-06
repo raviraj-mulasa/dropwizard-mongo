@@ -9,7 +9,6 @@ import io.dropwizard.setup.Environment;
 import net.geekscore.health.MongoDBHeathCheck;
 import net.geekscore.mongo.MongoDBSettings;
 import net.geekscore.mongo.MongoJacksonModule;
-import net.geekscore.services.ServiceBinder;
 
 public class App extends Application<AppConfiguration> {
 
@@ -41,7 +40,7 @@ public class App extends Application<AppConfiguration> {
         final MongoDBSettings mongoDBSettings = configuration.getMongoDBSettings();
         mongoDBSettings.build(environment);
 
-        jersey.register(new ServiceBinder()); // Register Services
+        jersey.register(new RepositoryBinder()); // Register Services
         jersey.packages("net.geekscore.resources"); // Register resources
 
         environment.healthChecks().register("mongoDB", new MongoDBHeathCheck(configuration));

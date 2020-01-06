@@ -1,4 +1,4 @@
-package net.geekscore.core;
+package net.geekscore.core.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

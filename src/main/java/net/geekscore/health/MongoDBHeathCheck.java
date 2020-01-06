@@ -5,7 +5,7 @@ import com.mongodb.client.ListDatabasesIterable;
 import com.mongodb.client.MongoCursor;
 import net.geekscore.AppConfiguration;
 import net.geekscore.mongo.MongoDB;
-import net.geekscore.utils.MongoDBUtils;
+import net.geekscore.mongo.utils.MongoDBUtils;
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

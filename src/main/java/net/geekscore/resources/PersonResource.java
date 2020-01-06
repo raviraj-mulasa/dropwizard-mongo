@@ -2,7 +2,7 @@ package net.geekscore.resources;
 
 import net.geekscore.core.DefaultResource;
 import net.geekscore.core.Repository;
-import net.geekscore.core.Person;
+import net.geekscore.core.domain.Person;
 import net.geekscore.services.PersonService;
 
 import javax.inject.Inject;

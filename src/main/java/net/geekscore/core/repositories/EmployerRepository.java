@@ -1,11 +1,11 @@
-package net.geekscore.services;
+package net.geekscore.core.repositories;
 
 import com.mongodb.client.MongoCollection;
-import net.geekscore.core.Employer;
+import net.geekscore.core.domain.Employer;
 import net.geekscore.mongo.MongoDB;
 import net.geekscore.mongo.MongoRepository;
 
-public class EmployerService implements MongoRepository<Employer> {
+public class EmployerRepository implements MongoRepository<Employer> {
     @Override
     public MongoCollection<Employer> collection() {
         return MongoDB.INSTANCE.database().getCollection("employer", Employer.class);

@@ -1,4 +1,6 @@
-package net.geekscore.core;
+package net.geekscore.core.domain;
+
+import net.geekscore.core.BaseEntity;
 
 public class Employer extends BaseEntity {
 

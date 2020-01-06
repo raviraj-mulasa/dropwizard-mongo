@@ -1,4 +1,4 @@
-package net.geekscore.core;
+package net.geekscore.core.domain;
 
 public final class Address {
 
