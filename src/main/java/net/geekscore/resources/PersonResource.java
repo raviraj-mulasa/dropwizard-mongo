@@ -2,7 +2,7 @@ package net.geekscore.resources;
 
 import net.geekscore.core.DefaultResource;
 import net.geekscore.core.Repository;
-import net.geekscore.core.domain.Person;
+import net.geekscore.core.entities.Person;
 import net.geekscore.services.PersonService;
 
 import javax.inject.Inject;
@@ -14,9 +14,7 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/person")
 @Produces(MediaType.APPLICATION_JSON)
-public class PersonResource implements DefaultResource<Person> {
-
-    private final Repository<Person> personRepository;
+public class PersonResource extends DefaultResource<Person> {
 
     private final PersonService personService;
 
@@ -25,13 +23,8 @@ public class PersonResource implements DefaultResource<Person> {
             @NotNull Repository<Person> personRepository,
             @NotNull PersonService personService
     ) {
-        this.personRepository = personRepository;
+        super(personRepository);
         this.personService = personService;
-    }
-
-    @Override
-    public Repository<Person> repository() {
-        return this.personRepository;
     }
 
     @GET

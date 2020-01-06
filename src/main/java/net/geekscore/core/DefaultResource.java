@@ -1,6 +1,7 @@
 package net.geekscore.core;
 
 import com.codahale.metrics.annotation.Timed;
+import org.slf4j.Logger;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -10,20 +11,26 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
-public interface DefaultResource<T extends BaseEntity> extends Loggable {
+public abstract class DefaultResource<T extends BaseEntity> implements Loggable {
 
-    Repository<T> repository();
+    protected final Logger logger = this.logger();
+
+    protected final Repository<T> repository;
+
+    public DefaultResource(Repository<T> repository) {
+        this.repository = repository;
+    }
 
     @GET
     @Path("/{id}")
     @Timed
-    default T get(@NotEmpty @Valid @PathParam("id") String id) {
-        return this.repository().findById(id);
+    public T get(@NotEmpty @Valid @PathParam("id") String id) {
+        return this.repository.findById(id);
     }
 
     @POST
     @Timed
-    default T add(@NotNull @Valid T t) {
-        return this.repository().save(t);
+    public T add(@NotNull @Valid T t) {
+        return this.repository.save(t);
     }
 }

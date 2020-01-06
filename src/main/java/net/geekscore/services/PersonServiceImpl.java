@@ -1,6 +1,6 @@
 package net.geekscore.services;
 
-import net.geekscore.core.domain.Person;
+import net.geekscore.core.entities.Person;
 import net.geekscore.core.Repository;
 
 import javax.inject.Inject;

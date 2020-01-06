@@ -1,8 +1,8 @@
 package net.geekscore;
 
-import net.geekscore.core.domain.Employer;
+import net.geekscore.core.entities.Employer;
 import net.geekscore.core.Repository;
-import net.geekscore.core.domain.Person;
+import net.geekscore.core.entities.Person;
 import net.geekscore.core.repositories.EmployerRepository;
 import net.geekscore.core.repositories.PersonRepository;
 import net.geekscore.mongo.MongoRepository;

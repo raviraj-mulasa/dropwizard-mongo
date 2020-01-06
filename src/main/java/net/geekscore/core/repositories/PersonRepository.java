@@ -1,7 +1,7 @@
 package net.geekscore.core.repositories;
 
 import com.mongodb.client.MongoCollection;
-import net.geekscore.core.domain.Person;
+import net.geekscore.core.entities.Person;
 import net.geekscore.mongo.MongoDB;
 import net.geekscore.mongo.MongoRepository;
 
