@@ -1,28 +1,34 @@
 package net.geekscore.core;
 
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.types.ObjectId;
+
 import java.io.Serializable;
 
 public class BaseEntity implements Serializable {
 
-    private String id;
+    @BsonId
+    private ObjectId id;
 
     private String createdBy;
 
     private String updatedBy;
 
-    private Long createdTS = System.currentTimeMillis();
+    private Long createdAt = System.currentTimeMillis();
 
-    private Long updatedTS = System.currentTimeMillis();
+    private Long updatedAt = System.currentTimeMillis();
 
     private boolean deleted = Boolean.FALSE;
 
     private Integer version = 0;
 
-    public String getId() {
+    @BsonId
+    public ObjectId getId() {
         return this.id;
     }
 
-    public void setId(String id) {
+    @BsonId
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
@@ -42,20 +48,20 @@ public class BaseEntity implements Serializable {
         this.updatedBy = updatedBy;
     }
 
-    public Long getCreatedTS() {
-        return this.createdTS;
+    public Long getCreatedAt() {
+        return this.createdAt;
     }
 
-    public void setCreatedTS(Long createdTS) {
-        this.createdTS = createdTS;
+    public void setCreatedAt(Long createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Long getUpdatedTS() {
-        return this.updatedTS;
+    public Long getUpdatedAt() {
+        return this.updatedAt;
     }
 
-    public void setUpdatedTS(Long updatedTS) {
-        this.updatedTS = updatedTS;
+    public void setUpdatedAt(Long updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public boolean isDeleted() {

@@ -1,18 +1,21 @@
 package net.geekscore.core;
 
-import javax.persistence.Index;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Min;
+import java.util.List;
 
-@Table(name="person"
-        , uniqueConstraints=@UniqueConstraint(columnNames={"code", "uid"})
-        , indexes={@Index(name = "ssd", columnList="sdsd,wwewe", unique = true)}
-        )
 public final class Person extends BaseEntity {
 
     private String name;
+
+    @Min(1)
     private int age;
+
     private Address address;
+
+    private List<String> employerIds;
+
+    public Person() {
+    }
 
     public Person(String name, int age, Address address) {
         this.name = name;
