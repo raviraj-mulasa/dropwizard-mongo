@@ -15,9 +15,9 @@ public abstract class DefaultResource<T extends BaseEntity> implements Loggable 
 
     protected final Logger logger = this.logger();
 
-    protected final Repository<T> repository;
+    protected final EntityStore<T> repository;
 
-    public DefaultResource(Repository<T> repository) {
+    public DefaultResource(EntityStore<T> repository) {
         this.repository = repository;
     }
 

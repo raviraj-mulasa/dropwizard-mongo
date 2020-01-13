@@ -3,12 +3,12 @@ package net.geekscore.mongo;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import net.geekscore.core.BaseEntity;
-import net.geekscore.core.Repository;
+import net.geekscore.core.EntityStore;
 import org.bson.types.ObjectId;
 
 import static com.mongodb.client.model.Filters.*;
 
-public interface MongoRepository<T extends BaseEntity> extends Repository<T> {
+public interface MongoEntityStore<T extends BaseEntity> extends EntityStore<T> {
 
     MongoCollection<T> collection();
 

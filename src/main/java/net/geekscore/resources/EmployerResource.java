@@ -1,7 +1,7 @@
 package net.geekscore.resources;
 
 import net.geekscore.core.DefaultResource;
-import net.geekscore.core.Repository;
+import net.geekscore.core.EntityStore;
 import net.geekscore.core.entities.Employer;
 
 import javax.inject.Inject;
@@ -13,10 +13,9 @@ import javax.ws.rs.core.MediaType;
 @Path("/employer")
 @Produces(MediaType.APPLICATION_JSON)
 public class EmployerResource extends DefaultResource<Employer> {
-
     @Inject
-    public EmployerResource(@NotNull Repository<Employer> employerRepository) {
-        super(employerRepository);
+    public EmployerResource(@NotNull EntityStore<Employer> employerEntityStore) {
+        super(employerEntityStore);
     }
 
 }

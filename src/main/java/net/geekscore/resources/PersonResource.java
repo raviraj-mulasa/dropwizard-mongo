@@ -1,7 +1,7 @@
 package net.geekscore.resources;
 
 import net.geekscore.core.DefaultResource;
-import net.geekscore.core.Repository;
+import net.geekscore.core.EntityStore;
 import net.geekscore.core.entities.Person;
 import net.geekscore.services.PersonService;
 
@@ -20,10 +20,10 @@ public class PersonResource extends DefaultResource<Person> {
 
     @Inject
     public PersonResource(
-            @NotNull Repository<Person> personRepository,
+            @NotNull EntityStore<Person> personEntityStore,
             @NotNull PersonService personService
     ) {
-        super(personRepository);
+        super(personEntityStore);
         this.personService = personService;
     }
 
