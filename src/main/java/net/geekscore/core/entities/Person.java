@@ -1,10 +1,12 @@
 package net.geekscore.core.entities;
 
 import net.geekscore.core.BaseEntity;
+import net.geekscore.core.annotations.Entity;
 
 import javax.validation.constraints.Min;
 import java.util.List;
 
+@Entity(name = "person")
 public final class Person extends BaseEntity {
 
     private String name;

@@ -1,36 +1,45 @@
 package net.geekscore.core;
 
 import com.codahale.metrics.annotation.Timed;
-import org.slf4j.Logger;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
 
-public abstract class DefaultResource<T extends BaseEntity> implements Loggable {
+public interface DefaultResource<T extends BaseEntity> extends Loggable {
 
-    protected final Logger logger = this.logger();
+    EntityStore<T> store();
 
-    protected final EntityStore<T> repository;
-
-    public DefaultResource(EntityStore<T> repository) {
-        this.repository = repository;
+    @PUT
+    @Timed
+    default T create(@NotNull @Valid T t) {
+        return this.store().upsert(t);
     }
 
     @GET
     @Path("/{id}")
     @Timed
-    public T get(@NotEmpty @Valid @PathParam("id") String id) {
-        return this.repository.findById(id);
+    default T retrieve(@NotEmpty @Valid @PathParam("id") String id) {
+        return this.store().findById(id);
     }
 
     @POST
     @Timed
-    public T add(@NotNull @Valid T t) {
-        return this.repository.save(t);
+    default T update(@NotNull @Valid T t) {
+        return this.store().upsert(t);
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Timed
+    default T delete(@NotEmpty @Valid @PathParam("id") String id) {
+        return this.store().deleteById(id);
+    }
+
+    @GET
+    @Path("/test")
+    default void test() {
+        System.out.println("Default TEST in DEfaultResource");;
     }
 }

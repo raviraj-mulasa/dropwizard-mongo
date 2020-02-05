@@ -1,8 +1,9 @@
 package net.geekscore.services;
 
-import net.geekscore.core.entities.Employer;
-import net.geekscore.core.entities.Person;
 import net.geekscore.core.EntityStore;
+import net.geekscore.core.entities.Employer;
+import net.geekscore.core.stores.PersonEntityStore;
+import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
@@ -10,13 +11,15 @@ import javax.validation.constraints.NotNull;
 
 public class PersonServiceImpl implements PersonService {
 
-    private final EntityStore<Person> personEntityStore;
+    private final Logger logger = this.logger();
+
+    private final PersonEntityStore personEntityStore;
 
     private final EntityStore<Employer> employerEntityStore;
 
     @Inject
     public PersonServiceImpl(
-            @NotNull EntityStore<Person> personEntityStore
+            @NotNull  PersonEntityStore personEntityStore
             ,@NotNull EntityStore<Employer> employerEntityStore
     ) {
         this.personEntityStore = personEntityStore;
@@ -25,6 +28,9 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void test() {
-        System.out.println("Reaching PERSON SERVICE IMPL ");
+        this.personEntityStore.x();
+        logger.info("Reaching PERSON SERVICE IMPL ");
     }
+
+
 }

@@ -14,17 +14,24 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/person")
 @Produces(MediaType.APPLICATION_JSON)
-public class PersonResource extends DefaultResource<Person> {
+public class PersonResource implements DefaultResource<Person> {
 
     private final PersonService personService;
+
+    private final EntityStore<Person> personEntityStore;
 
     @Inject
     public PersonResource(
             @NotNull EntityStore<Person> personEntityStore,
             @NotNull PersonService personService
     ) {
-        super(personEntityStore);
+        this.personEntityStore = personEntityStore;
         this.personService = personService;
+    }
+
+    @Override
+    public EntityStore<Person> store() {
+        return this.personEntityStore;
     }
 
     @GET

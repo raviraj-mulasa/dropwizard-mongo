@@ -1,7 +1,9 @@
 package net.geekscore.core.entities;
 
 import net.geekscore.core.BaseEntity;
+import net.geekscore.core.annotations.Entity;
 
+@Entity(name = "employer")
 public class Employer extends BaseEntity {
 
     private String name;

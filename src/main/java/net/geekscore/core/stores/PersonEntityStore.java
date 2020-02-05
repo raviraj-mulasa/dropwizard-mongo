@@ -5,18 +5,15 @@ import net.geekscore.core.entities.Person;
 import net.geekscore.mongo.Collection;
 import net.geekscore.mongo.MongoEntityStore;
 
+import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 
-public class PersonEntityStore implements MongoEntityStore<Person> {
 
-    private final MongoCollection<Person> personCollection;
-
+public class PersonEntityStore extends MongoEntityStore<Person> {
+    @Inject
     public PersonEntityStore(@NotNull @Collection MongoCollection<Person> personCollection) {
-        this.personCollection = personCollection;
+        super(personCollection);
     }
 
-    @Override
-    public MongoCollection<Person> collection() {
-        return this.personCollection;
-    }
+    public void x(){}
 }

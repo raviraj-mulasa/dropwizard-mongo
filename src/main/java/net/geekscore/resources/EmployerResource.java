@@ -12,10 +12,17 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/employer")
 @Produces(MediaType.APPLICATION_JSON)
-public class EmployerResource extends DefaultResource<Employer> {
+public class EmployerResource implements DefaultResource<Employer> {
+
+    private final EntityStore<Employer> employerEntityStore;
+
     @Inject
     public EmployerResource(@NotNull EntityStore<Employer> employerEntityStore) {
-        super(employerEntityStore);
+        this.employerEntityStore = employerEntityStore;
     }
 
+    @Override
+    public EntityStore<Employer> store() {
+        return this.employerEntityStore;
+    }
 }
